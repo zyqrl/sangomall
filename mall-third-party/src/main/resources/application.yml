@@ -1,0 +1,32 @@
+# 数据库的连接新
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.56.100:8848
+    alicloud:
+      access-key: LTAI5tBPqoroToQNyrHpYJLR
+      secret-key: 3GnWaRhcBW3gUDhNSVr23fSrM6A0Q4
+      oss:
+        endpoint: oss-cn-guangzhou.aliyuncs.com
+        bucket: mashibing-mall
+      sms:
+        host: https://dfsns.market.alicloudapi.com
+        path: /data/send_sms
+        method: POST
+        appCode: 192a6811b5a4458f9402da3b0c3b9aa5
+    application:
+      name: mall-third
+    sentinel:
+      transport:
+        client-ip: localhost
+        dashboard: localhost:8080
+        port: 8719
+server:
+  port: 8100
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
