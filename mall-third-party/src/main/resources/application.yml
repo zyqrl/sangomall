@@ -3,13 +3,13 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.56.100:8848
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
     alicloud:
-      access-key: LTAI5tBPqoroToQNyrHpYJLR
-      secret-key: 3GnWaRhcBW3gUDhNSVr23fSrM6A0Q4
+      access-key: LTAI5tDwDq2UkM9fXo48gfan
+      secret-key: GZ6qC9bfcrRxhbqOtF1W0vh9oyOYk8
       oss:
-        endpoint: oss-cn-guangzhou.aliyuncs.com
-        bucket: mashibing-mall
+        endpoint: oss-cn-beijing.aliyuncs.com
+        bucket: lzb-ad
       sms:
         host: https://dfsns.market.alicloudapi.com
         path: /data/send_sms
@@ -20,7 +20,7 @@ spring:
     sentinel:
       transport:
         client-ip: localhost
-        dashboard: localhost:8080
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
         port: 8719
 server:
   port: 8100
