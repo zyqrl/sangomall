@@ -14,7 +14,7 @@ public class MyRedisConfig {
         Config config = new Config();
         // 配置连接的信息
         config.useSingleServer()
-                .setAddress("redis://192.168.56.100:6379");
+                .setAddress("redis://redis.sango-mall.svc.cluster.local.:6379");
         RedissonClient redissonClient = Redisson.create(config);
         return  redissonClient;
     }
