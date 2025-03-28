@@ -2,7 +2,7 @@
 spring:
   datasource:
     username: root
-    password: root
+    password: 123456
     url: jdbc:mysql://mysql-master.sango-mall.svc.cluster.local.:3306/mall_oms
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
