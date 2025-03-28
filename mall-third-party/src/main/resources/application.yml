@@ -4,9 +4,6 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.56.100:8848
-      oss:
-        endpoint: oss-cn-guangzhou.aliyuncs.com
-        bucket: mashibing-mall
       sms:
         host: https://dfsns.market.alicloudapi.com
         path: /data/send_sms

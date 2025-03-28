@@ -9,8 +9,6 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.56.100:8848
-    alicloud:
-      oss:
     sentinel:
       transport:
         client-ip: localhost
