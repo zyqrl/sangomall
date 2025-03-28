@@ -25,7 +25,7 @@ spring:
   redis:
     open: false  # 是否开启redis缓存  true开启   false关闭
     database: 0
-    host: 192.168.56.100
+    host: redis.sango-mall.svc.cluster.local.
     port: 6379
     password:    # 密码（默认为空）
     timeout: 6000ms  # 连接超时时长（毫秒）
@@ -40,7 +40,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.56.100:8848
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
   application:
     name: renren-fast
 #  resources:
