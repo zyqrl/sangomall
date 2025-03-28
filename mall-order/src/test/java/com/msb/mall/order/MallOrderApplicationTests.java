@@ -22,7 +22,7 @@ class MallOrderApplicationTests {
         // 实例化消息生产者Producer
         DefaultMQProducer producer = new DefaultMQProducer("orderGroup1");
         // 设置NameServer的地址
-        producer.setNamesrvAddr("192.168.56.100:9876");
+        producer.setNamesrvAddr("rocketmq-namesrv.sango-mall.svc.cluster.local.:9876");
         // 启动Producer实例
         producer.start();
         for (int i = 0; i < 100; i++) {
@@ -46,7 +46,7 @@ class MallOrderApplicationTests {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("orderGroup1");
 
         // 设置NameServer的地址
-        consumer.setNamesrvAddr("192.168.56.100:9876");
+        consumer.setNamesrvAddr("rocketmq-namesrv.sango-mall.svc.cluster.local.:9876");
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         consumer.subscribe("TopicTest", "*");
@@ -71,7 +71,7 @@ class MallOrderApplicationTests {
         // 实例化消费者
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("ExampleConsumer");
         // 设置NameServer的地址
-        consumer.setNamesrvAddr("192.168.56.100:9876");
+        consumer.setNamesrvAddr("rocketmq-namesrv.sango-mall.svc.cluster.local.:9876");
         // 订阅Topics
         consumer.subscribe("TestTopicDelay", "*");
         // 注册消息监听者
@@ -94,7 +94,7 @@ class MallOrderApplicationTests {
     public void producerDelayMSG ()throws Exception{
         // 实例化一个生产者来产生延时消息
         DefaultMQProducer producer = new DefaultMQProducer("ExampleProducerGroup");
-        producer.setNamesrvAddr("192.168.56.100:9876");
+        producer.setNamesrvAddr("rocketmq-namesrv.sango-mall.svc.cluster.local.:9876");
         // 启动生产者
         producer.start();
         int totalMessagesToSend = 100;
