@@ -15,6 +15,10 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   thymeleaf:
+    cache: false 
+    prefix: classpath:/templates
+    suffix: .html
+  thymeleaf:
     cache: false # \u5173\u95EDThymeleaf\u7684\u7F13\u5B58
   redis:
     host: redis.sango-mall.svc.cluster.local.
