@@ -5,7 +5,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.56.100:8848
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
     gateway:
       routes:
         - id: product_route
@@ -74,7 +74,7 @@ spring:
             - Host=order.msb.com
     sentinel:
       transport:
-        dashboard: localhost:8080
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
         client-ip: localhost
         port: 8719
 
