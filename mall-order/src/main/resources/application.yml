@@ -3,12 +3,12 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.56.100:3306/mall-oms
+    url: jdbc:mysql://mysql-master.sango-mall.svc.cluster.local.:3306/mall_oms
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.56.100:8848
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
     #alibaba:
      # seata:
       #  tx-service-group: mall-order-group
@@ -16,7 +16,7 @@ spring:
       transport:
         port: 8719
         client-ip: localhost
-        dashboard: localhost:8080
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
   application:
     name: mall-order
   session:
@@ -24,7 +24,7 @@ spring:
     redis:
       namespace: spring:session
   redis:
-    host: 192.168.56.100
+    host: redis.sango-mall.svc.cluster.local.
     port: 6379
 
 mybatis-plus:
@@ -45,7 +45,7 @@ user:
 
 # RocketMQ的相关信息
 rocketmq:
-  name-server: 192.168.56.100:9876
+  name-server: rocketmq-namesrv.sango-mall.svc.cluster.local.:9876
   producer:
     group: order-producer
   consumer:
