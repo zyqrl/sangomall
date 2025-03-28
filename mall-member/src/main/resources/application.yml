@@ -3,17 +3,17 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.56.100:3306/mall-ums
+    url: jdbc:mysql://mysql-master.sango-mall.svc.cluster.local.:3306/mall_ums
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.56.100:8848
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
     sentinel:
       transport:
         client-ip: localhost
         port: 8719
-        dashboard: localhost:8080
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
   application:
     name: mall-memeber
 
