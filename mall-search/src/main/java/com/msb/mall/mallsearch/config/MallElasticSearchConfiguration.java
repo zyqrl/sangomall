@@ -28,7 +28,7 @@ public class MallElasticSearchConfiguration {
 
     @Bean
     public RestHighLevelClient restHighLevelClient(){
-        RestClientBuilder builder = RestClient.builder(new HttpHost("192.168.56.100", 9200, "http"));
+        RestClientBuilder builder = RestClient.builder(new HttpHost("es-0wib.sango-mall.svc.cluster.local.", 9200, "http"));
         RestHighLevelClient client = new RestHighLevelClient(builder);
         return client;
     }
