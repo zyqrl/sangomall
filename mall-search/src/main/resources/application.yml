@@ -21,7 +21,7 @@ spring:
     redis:
       namespace: spring:session
   redis:
-    host: 192.168.56.100
+    host: redis.sango-mall.svc.cluster.local.
     port: 6379
 server:
   port: 8090
