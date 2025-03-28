@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-seckill
+  namespace: sango-mall
+  labels:
+    app: mall-seckill
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+	  app: mall-seckill
+	template:
+	  metadata:
+	    labels:
+		  app: mall-seckill
+	  spec: 
+	    containers: 
+		- name: mall-seckill
+		  image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+		  imagePullPolicy: Always
+		  ports:
+		  - name: mall-seckill
+		    containerPort: 9601
+		  resource: 
+		    limits:
+			  cpu: 1000m
+			  memory: 500Mi
+			requests:
+			  cpu: 10m
+			  memory: 10Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mall-seckill
+  namespace: sango-mall
+  labels:
+    app: mall-seckill
+spec:
+  selector:
+    app: mall-seckill
+  ports:
+  - name: svc-mall-seckill
+    port: 9601
+	targetPort: 9601

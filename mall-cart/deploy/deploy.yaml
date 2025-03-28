@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-cart
+  namespace: sango-mall
+  labels:
+    app: mall-cart
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+	  app: mall-cart
+	template:
+	  metadata:
+	    labels:
+		  app: mall-cart
+	  spec: 
+	    containers: 
+		- name: mall-cart
+		  image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+		  imagePullPolicy: Always
+		  ports:
+		  - name: mall-cart
+		    containerPort: 22200
+		  resource: 
+		    limits:
+			  cpu: 100m
+			  memory: 500Mi
+			requests:
+			  cpu: 10m
+			  memory: 10Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mall-cart
+  namespace: sango-mall
+  labels:
+    app: mall-cart
+spec:
+  selector:
+    app: mall-cart
+  ports:
+  - name: svc-mall-cart
+    port: 22200
+	targetPort: 22200

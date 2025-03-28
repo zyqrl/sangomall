@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-ware
+  namespace: sango-mall
+  labels:
+    app: mall-ware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+	  app: mall-ware
+	template:
+	  metadata:
+	    labels:
+		  app: mall-ware
+	  spec: 
+	    containers: 
+		- name: mall-ware
+		  image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+		  imagePullPolicy: Always
+		  ports:
+		  - name: mall-ware
+		    containerPort: 8050
+		  resource: 
+		    limits:
+			  cpu: 1000m
+			  memory: 500Mi
+			requests:
+			  cpu: 10m
+			  memory: 10Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mall-ware
+  namespace: sango-mall
+  labels:
+    app: mall-ware
+spec:
+  selector:
+    app: mall-ware
+  ports:
+  - name: svc-mall-ware
+    port: 8050
+	targetPort: 8050

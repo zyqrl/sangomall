@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-search
+  namespace: sango-mall
+  labels:
+    app: mall-search
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+	  app: mall-search
+	template:
+	  metadata:
+	    labels:
+		  app: mall-search
+	  spec: 
+	    containers: 
+		- name: mall-search
+		  image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+		  imagePullPolicy: Always
+		  ports:
+		  - name: mall-search
+		    containerPort: 8090
+		  resource: 
+		    limits:
+			  cpu: 1000m
+			  memory: 500Mi
+			requests:
+			  cpu: 10m
+			  memory: 10Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mall-search
+  namespace: sango-mall
+  labels:
+    app: mall-search
+spec:
+  selector:
+    app: mall-search
+  ports:
+  - name: svc-mall-search
+    port: 8090
+	targetPort: 8090

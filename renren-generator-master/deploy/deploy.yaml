@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: renren-generator
+  namespace: sango-mall
+  labels:
+    app: renren-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+	  app: renren-generator
+	template:
+	  metadata:
+	    labels:
+		  app: renren-generator
+	  spec: 
+	    containers: 
+		- name: renren-generator
+		  image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+		  imagePullPolicy: Always
+		  ports:
+		  - name: renren-generator
+		    containerPort: 80
+		  resource: 
+		    limits:
+			  cpu: 1000m
+			  memory: 500Mi
+			requests:
+			  cpu: 10m
+			  memory: 10Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: renren-generator
+  namespace: sango-mall
+  labels:
+    app: renren-generator
+spec:
+  selector:
+    app: renren-generator
+  ports:
+  - name: svc-renren-generator
+    port: 80
+	targetPort: 80

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-coupon
+  namespace: sango-mall
+  labels:
+    app: mall-coupon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+	  app: mall-coupon
+	template:
+	  metadata:
+	    labels:
+		  app: mall-coupon
+	  spec: 
+	    containers: 
+		- name: mall-coupon
+		  image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+		  imagePullPolicy: Always
+		  ports:
+		  - name: mall-coupon
+		    containerPort: 8010
+		  resource: 
+		    limits:
+			  cpu: 100m
+			  memory: 500Mi
+			requests:
+			  cpu: 10m
+			  memory: 10Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mall-coupon
+  namespace: sango-mall
+  labels:
+    app: mall-coupon
+spec:
+  selector:
+    app: mall-coupon
+  ports:
+  - name: svc-mall-coupon
+    port: 8010
+	targetPort: 8010
