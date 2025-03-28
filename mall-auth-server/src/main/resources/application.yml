@@ -3,11 +3,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.56.100:8848
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
     sentinel:
       transport:
         port: 8719
-        dashboard: localhost:8080
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
         client-ip: localhost
   application:
     name: mall-auth
@@ -17,7 +17,7 @@ spring:
   thymeleaf:
     cache: false # \u5173\u95EDThymeleaf\u7684\u7F13\u5B58
   redis:
-    host: 192.168.56.100
+    host: redis.sango-mall.svc.cluster.local.
     port: 6379
   session:
     store-type: redis
