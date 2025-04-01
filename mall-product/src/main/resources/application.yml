@@ -1,0 +1,64 @@
+# 数据库的连接新
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://mysql-master.sango-mall.svc.cluster.local.:3306/mall_pms
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
+    alicloud:
+      access-key: LTAI5tDwDq2UkM9fXo48gfan
+      secret-key: GZ6qC9bfcrRxhbqOtF1W0vh9oyOYk8
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+    sentinel:
+      transport:
+        client-ip: localhost
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
+        port: 8719
+  application:
+    name: mall-product
+  # 统一的全局的--设置服务器响应给客户端的日期时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false # 关闭Thymeleaf的缓存
+  redis:
+    host: redis.sango-mall.svc.cluster.local.
+    port: 6379
+  cache:
+    type: redis # SpringCache 缓存的类型是 Redis
+    redis:
+      time-to-live: 60000 # 指定缓存key的过期时间
+      # key-prefix: bobo_
+      use-key-prefix: true
+      cache-null-values: true # 是否缓存空值，防止缓存穿透
+  session:
+    store-type: redis
+    redis:
+      namespace: spring:session
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto # 主键自增
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+server:
+  port: 8040
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+feign:
+  sentinel:
+    enabled: true
+

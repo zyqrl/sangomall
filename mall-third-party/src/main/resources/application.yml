@@ -1,0 +1,32 @@
+# 数据库的连接新
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
+    alicloud:
+      access-key: LTAI5tDwDq2UkM9fXo48gfan
+      secret-key: GZ6qC9bfcrRxhbqOtF1W0vh9oyOYk8
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+        bucket: lzb-ad
+      sms:
+        host: https://dfsns.market.alicloudapi.com
+        path: /data/send_sms
+        method: POST
+        appCode: 192a6811b5a4458f9402da3b0c3b9aa5
+    application:
+      name: mall-third
+    sentinel:
+      transport:
+        client-ip: localhost
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
+        port: 8719
+server:
+  port: 8100
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+

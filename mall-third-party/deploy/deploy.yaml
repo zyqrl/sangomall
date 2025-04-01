@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-third-party
+  namespace: sangomall
+  labels:
+    app: mall-third-party
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-third-party
+  template:
+    metadata:
+      labels:
+        app: mall-third-party
+    spec:
+      containers:
+        - name: mall-third-party
+          image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+          imagePullPolicy: Always
+          ports:
+            - name: tcp-8100
+              containerPort: 8100
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mall-third-party
+  namespace: sangomall
+  labels:
+    app: mall-third-party
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8100
+      targetPort: 8100
+  selector:
+      app: mall-third-party

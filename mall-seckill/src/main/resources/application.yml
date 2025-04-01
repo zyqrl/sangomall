@@ -1,0 +1,45 @@
+# 数据库的连接新
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
+        client-ip: localhost
+  application:
+    name: mall-seckill
+  redis:
+    host: redis.sango-mall.svc.cluster.local.
+    port: 6379
+  task:
+    execution:
+      pool:
+        core-size: 5
+        max-size: 20
+  session:
+    store-type: redis
+    redis:
+      namespace: spring:redis
+  thymeleaf:
+    cache: false
+
+server:
+  port: 9601
+
+# RocketMQ的相关信息
+rocketmq:
+  name-server: rocketmq-namesrv.sango-mall.svc.cluster.local.:9876
+  producer:
+    group: seckill-order-producer
+  consumer:
+    group: seckill-order-consumer
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+

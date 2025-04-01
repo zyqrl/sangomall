@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: renren-generator
+  namespace: sangomall
+  labels:
+    app: renren-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: renren-generator
+  template:
+    metadata:
+      labels:
+        app: renren-generator
+    spec:
+      containers:
+        - name: renren-generator
+          image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+          imagePullPolicy: Always
+          ports:
+            - name: tcp-80
+              containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: renren-generator
+  namespace: sangomall
+  labels:
+    app: renren-generator
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: renren-generator

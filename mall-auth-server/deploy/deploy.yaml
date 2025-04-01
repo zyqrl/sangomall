@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-auth-server
+  namespace: sangomall
+  labels:
+    app: mall-auth-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-auth-server
+  template:
+    metadata:
+      labels:
+        app: mall-auth-server
+    spec:
+      containers:
+        - name: mall-auth-server
+          image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+          imagePullPolicy: Always
+          ports:
+            - name: tcp-30000
+              containerPort: 30000
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mall-auth-server
+  namespace: sangomall
+  labels:
+    app: mall-auth-server
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 30000
+      targetPort: 30000
+  selector:
+    app: mall-auth-server

@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-seckill
+  namespace: sangomall
+  labels:
+    app: mall-seckill
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-seckill
+  template:
+    metadata:
+      labels:
+        app: mall-seckill
+    spec:
+      containers:
+        - name: mall-seckill
+          image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+          imagePullPolicy: Always
+          ports:
+            - name: tcp-9601
+              containerPort: 9601
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mall-seckill
+  namespace: sangomall
+  labels:
+    app: mall-seckill
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9601
+      targetPort: 9601
+  selector:
+    app: mall-seckill

@@ -1,0 +1,36 @@
+# 数据库的连接新
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://mysql-master.sango-mall.svc.cluster.local.:3306/mall_wms
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
+    #alibaba:
+     # seata:
+      #  tx-service-group: mall-ware-group
+    sentinel:
+      transport:
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
+        client-ip: localhost
+        port: 8719
+  application:
+    name: mall-ware
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto # 主键自增
+server:
+  port: 8050
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

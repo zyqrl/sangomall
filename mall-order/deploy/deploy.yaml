@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-order
+  namespace: sangomall
+  labels:
+    app: mall-order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-order
+  template:
+    metadata:
+      labels:
+        app: mall-order
+    spec:
+      containers:
+        - name: mall-order
+          image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+          imagePullPolicy: Always
+          ports:
+            - name: tcp-8030
+              containerPort: 8030
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mall-order
+  namespace: sangomall
+  labels:
+    app: mall-order
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8030
+      targetPort: 8030
+  selector:
+    app: mall-order

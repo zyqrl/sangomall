@@ -1,0 +1,58 @@
+## 数据库的连接新
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://mysql-master.sango-mall.svc.cluster.local.:3306/mall_oms
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.sango-mall.svc.cluster.local.:8848
+    #alibaba:
+     # seata:
+      #  tx-service-group: mall-order-group
+    sentinel:
+      transport:
+        port: 8719
+        client-ip: localhost
+        dashboard: sentinel.sango-mall.svc.cluster.local.:8858
+  application:
+    name: mall-order
+  session:
+    store-type: redis
+    redis:
+      namespace: spring:session
+  redis:
+    host: redis.sango-mall.svc.cluster.local.
+    port: 6379
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto # 主键自增
+
+server:
+  port: 8030
+  servlet:
+    session:
+      timeout: 30m
+
+user:
+  userName: zhangsan
+  age: 18
+
+# RocketMQ的相关信息
+rocketmq:
+  name-server: rocketmq-namesrv.sango-mall.svc.cluster.local.:9876
+  producer:
+    group: order-producer
+  consumer:
+    group: order-consumer
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+

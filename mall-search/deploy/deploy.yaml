@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mall-search
+  namespace: sangomall
+  labels:
+    app: mall-search
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-search
+  template:
+    metadata:
+      labels:
+        app: mall-search
+    spec:
+      containers:
+        - name: mall-search
+          image: $REGISTRY/$DOCKERHUB_NAMESPACE/$PROJECT_NAME:latest
+          imagePullPolicy: Always
+          ports:
+            - name: tcp-8090
+              containerPort: 8090
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mall-search
+  namespace: sangomall
+  labels:
+    app: mall-search
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8090
+      targetPort: 8090
+  selector:
+    app: mall-search
